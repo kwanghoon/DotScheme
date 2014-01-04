@@ -1,4 +1,14 @@
 /*
+ * R4RS_java.jj
+ * =======
+ *
+ * A parser for Scheme with Dot Notation
+ *
+ * Author: Kwanghoon Choi
+ *
+ * Version 0.1 (2014-01-04)
+ *
+ *
  * R4RS.jj
  * =======
  *
