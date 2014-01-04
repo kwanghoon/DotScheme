@@ -1,0 +1,4 @@
+(define wifiMgr (.getSystemService context (android.content.Context.WIFI_SERVICE$)))
+(define wifiEnabled (.isWifiEnabled wifiMgr))
+(if (equal? wifiEnabled #t) (.setWifiEnabled wifiMgr #f)
+(.setWifiEnabled wifiMgr #t))

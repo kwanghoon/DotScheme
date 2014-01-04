@@ -1,0 +1,2 @@
+(define intent (android.content.Intent. "android.intent.action.VIEW" (android.net.Uri.parse "http://www.youtube.com/embed/EyR9lx92x9A?rel=0")))
+(.startActivity context intent)

@@ -1,0 +1,75 @@
+
+[MEMO]
+
+1. The Java Dot Notation
+
+Instance method
+ - '.' identifier
+ - (.setFont COMP FONT)
+ - cf. In R4RS, parse error in R4RS.jj
+
+Instance field
+ - '.' identifer '$'
+ - (.first$ '(1 2))
+ - cf. In R4RS, parse error
+ - cf. In R4RS, first$ is parsed as <VARIABLE> in R4RS.jj.
+
+Contructor
+ - identifier '.'
+ - (Font. NAME STYLE SIZE)
+ - cf. In R4RS, Font. is parsed as <VARIABLE> in R4RS.jj.
+
+Static methods
+ - identifier '.' identifier
+ - (Math.round 123.456)
+ - cf. In R4RS, Math.round is parsed as <VARIABLE> in R4RS.jj.
+
+Static field
+ - identifier '.' identifier '$'
+ - (Font.BOLD$)
+ - cf. In R4RS, (Font.BOLD$) is parsed as <VARIABLE> in R4RS.jj.
+
+Inner class
+ - identifier '$' identifier
+ - java.awt.geom.Point2D$Double
+ - cf. In R4RS, (Point2D$Double) is parsed as <VARIABLE> in R4RS.jj.
+
+
+
+2. R4RS.jj를 수정하여 R4RS_java.jj를 만듬
+ - 토큰 <VARIABLE>에서 <INITIAL>에 <DOT> <LETTER> 추가
+ - <VARIABLE>은 <DOT> <LETTER>로 시작하는 토큰이 가능해짐
+
+R4RS.jj
+
+TOKEN : /* variable */
+{
+  < VARIABLE : <INITIAL> ( <SUBSEQUENT> )* | <PECULIAR_IDENTIFIER> >
+| < #INITIAL : <LETTER> | <SPECIAL_INITIAL> >
+| < #LETTER : ["a"-"z"] >
+| < #SPECIAL_INITIAL :
+      ["!","$","%","&","*","/",":","<","=",">","?","~","_","^"] >
+| < #SUBSEQUENT : <INITIAL> | <DIGIT> | <SPECIAL_SUBSEQUENT> >
+| < #DIGIT : ["0"-"9"] >
+| < #SPECIAL_SUBSEQUENT : [".","+","-"] >
+| < #PECULIAR_IDENTIFIER : ["+","-"] | "..." >
+}
+
+
+R4RS_java.jj
+
+TOKEN : /* variable */
+{
+  < VARIABLE : <INITIAL> ( <SUBSEQUENT> )* | <PECULIAR_IDENTIFIER> >
+| < #INITIAL : <LETTER> | <SPECIAL_INITIAL> | <DOT> <LETTER> >
+| < #LETTER : ["a"-"z"] >
+| < #SPECIAL_INITIAL :
+      ["!","$","%","&","*","/",":","<","=",">","?","~","_","^"] >
+| < #SUBSEQUENT : <INITIAL> | <DIGIT> | <SPECIAL_SUBSEQUENT> >
+| < #DIGIT : ["0"-"9"] >
+| < #SPECIAL_SUBSEQUENT : [".","+","-"] >
+| < #PECULIAR_IDENTIFIER : ["+","-"] | "..." >
+| < #DOT : ["."] >
+}
+
+

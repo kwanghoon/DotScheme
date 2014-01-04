@@ -1,0 +1,4 @@
+(define pm (.getPackageManager context))
+(define i (.getLaunchIntentForPackage pm "com.android.browser"))
+(.setFlags i (android.content.Intent.FLAG_ACTIVITY_NEW_TASK$))
+(.startActivity context i)

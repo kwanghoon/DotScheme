@@ -1,0 +1,6 @@
+(define vibMgr (.getSystemService context (android.content.Context.AUDIO_SERVICE$)))(define ringerMode (.getRingerMode vibMgr))
+(if (equal? ringerMode (android.media.AudioManager.RINGER_MODE_SILENT$))
+(.setRingerMode vibMgr (android.media.AudioManager.RINGER_MODE_NORMAL$))
+(if (equal? ringerMode (android.media.AudioManager.RINGER_MODE_NORMAL$))
+(.setRingerMode vibMgr (android.media.AudioManager.RINGER_MODE_VIBRATE$))
+(.setRingerMode vibMgr (android.media.AudioManager.RINGER_MODE_SILENT$))))

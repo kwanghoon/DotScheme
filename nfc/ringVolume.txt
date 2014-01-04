@@ -1,0 +1,3 @@
+(define am (.getSystemService context (android.content.Context.AUDIO_SERVICE$)))
+(define vol 7)
+(.setStreamVolume am (android.media.AudioManager.STREAM_RING$) vol (android.media.AudioManager.FLAG_PLAY_SOUND$))
